@@ -10,7 +10,9 @@ import { InvestmentsModule } from './investments/investments.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/ivystacks'),
+    MongooseModule.forRoot(
+      'mongodb+srv://ivystacks:Qwerty101@cluster0.nhmag6b.mongodb.net/?retryWrites=true&w=majority',
+    ),
     ConfigModule.forRoot({
       envFilePath: '.development.env',
       isGlobal: true,

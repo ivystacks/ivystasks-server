@@ -43,9 +43,13 @@ export class UsersController {
   findAll() {
     return this.usersService.getUsers();
   }
-  @Post('/admin/?id&email')
-  admin(@Param() id: any, email: any) {
-    return this.usersService.makeAdmin(id, email);
+  @Get('total')
+  findAllUsers() {
+    return this.usersService.getNumberOfUsers();
+  }
+  @Post('makemeadmin')
+  admin(@Body() payload: LoginUserDto) {
+    return this.usersService.makeAdmin(payload);
   }
 
   @Get('user/:id')

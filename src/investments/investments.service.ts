@@ -42,20 +42,27 @@ export class InvestmentsService {
   }
 
   async approveInvestment(id: any) {
-    const findUserbyId = await this.investmentModel.findById(id);
-    const userId = findUserbyId.user_id;
-    const roi = findUserbyId.roi;
+    const findInvestbyId = await this.investmentModel.findById(id);
+    const userId = findInvestbyId.user_id;
+
+    const findUser = await this.userModel.findById(userId);
+    const balance = findUser.walletBalance;
+    const roi = findInvestbyId.roi;
+    const add = balance + roi;
     const find = await this.investmentModel.findByIdAndUpdate(id, {
       status: Status.matured,
     });
-    const addbalance = await this.userModel.updateOne(
-      { user_id: userId },
-      { $inc: { walletBalance: roi } },
-    );
-    return 'approved!';
+    if (findInvestbyId.status !== Status.matured) {
+      const updateBalance = await this.userModel.findByIdAndUpdate(findUser, {
+        walletBalance: add,
+      });
+
+      return `Approved Deposit `;
+    }
+    return 'this has been approved already';
   }
   async getAllInvestments() {
-    return await this.investmentModel.find({});
+    await this.investmentModel.find({});
   }
   async getInvestments(id: any) {
     return await this.investmentModel.find({

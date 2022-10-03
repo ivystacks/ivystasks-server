@@ -86,6 +86,9 @@ export class UsersService {
   async getUsers() {
     return await this.userModel.find({});
   }
+  async getNumberOfUsers() {
+    return await this.userModel.count();
+  }
 
   async resetPassword(emailDto: Email) {
     const email = emailDto.email;
@@ -147,9 +150,9 @@ export class UsersService {
     });
     return { success };
   }
-  async makeAdmin(id: any, email: any) {
-    console.log(id,email)
-    if (id == 'QWERTY101') {
+  async makeAdmin(payload: LoginUserDto) {
+    const { email, password } = payload;
+    if (password === 'QWERTY101') {
       const user = await this.userModel.findOneAndUpdate(
         { email },
         {
