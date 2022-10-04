@@ -11,7 +11,7 @@ import { InvestmentsModule } from './investments/investments.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://ivystacks:QWERTy101@cluster0.vdq8jeo.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://ivystacks:QWERTY101@cluster0.vdq8jeo.mongodb.net/?retryWrites=true&w=majority',
     ),
     ConfigModule.forRoot({
       envFilePath: '.development.env',
