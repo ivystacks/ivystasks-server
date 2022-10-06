@@ -25,13 +25,12 @@ export class UsersService {
   ) {}
 
   async findById(id: any) {
-    console.log('UserID', id);
     const user = await this.userModel.findOne({ id });
     return user;
   }
   async findByEmail(email: any) {
     const user = await this.userModel.findOne({ email });
-    return await user.name;
+    return user.name;
   }
   async findIdByEmail(email: any) {
     const user = await this.userModel.findOne({ email });

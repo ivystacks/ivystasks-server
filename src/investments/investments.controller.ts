@@ -18,7 +18,7 @@ export class InvestmentsController {
     return this.investmentsService.approveInvestment(id);
   }
 
-  @Get()
+  @Get('all')
   getAllInvestments() {
     return this.investmentsService.getAllInvestments();
   }

@@ -9,6 +9,7 @@ import { InvestmentDocument } from './models/investment.model';
 import { UserDocument } from 'src/users/models/user.model';
 import { Status } from './status-enum';
 import { ApproveInvestmentDto } from './dto/approve-investment-dto';
+import { ReadableStreamDefaultController } from 'stream/web';
 
 @Injectable()
 export class InvestmentsService {
@@ -62,7 +63,7 @@ export class InvestmentsService {
     return 'this has been approved already';
   }
   async getAllInvestments() {
-    await this.investmentModel.find({});
+    return await this.investmentModel.find({});
   }
   async getInvestments(id: any) {
     return await this.investmentModel.find({
