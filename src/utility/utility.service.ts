@@ -17,7 +17,7 @@ export class UtilityService {
     const imageUrl = result.secure_url;
     const cloudinary_id = result.public_id;
     if (!result) {
-      console.log('DANGERRR!!!');
+      console.log('DANGER!!!');
     } else {
       return { imageUrl, cloudinary_id };
     }
