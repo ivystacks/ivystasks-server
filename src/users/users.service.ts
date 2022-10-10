@@ -55,7 +55,7 @@ export class UsersService {
       const newUser = new this.userModel(createUserDto);
       const saltRounds = 10;
       newUser.name = name;
-      newUser.email = email;
+      newUser.email = email.toLowerCase();
       newUser.password = await bcrypt.hash(createUserDto.password, saltRounds);
       newUser.isAdmin = false;
       await newUser.save();
@@ -67,7 +67,8 @@ export class UsersService {
 
   async loginUser(login: LoginUserDto) {
     const { email, password } = login;
-    const user = await this.userModel.findOne({ email });
+    const cEmail = email.toLowerCase();
+    const user = await this.userModel.findOne({ cEmail });
     if (!user) {
       throw new UnauthorizedException('users doesnt exist');
     }
@@ -80,7 +81,8 @@ export class UsersService {
   }
   async findByPayload(payload: Payload) {
     const { email } = payload;
-    return await this.userModel.findOne({ email });
+    const cEmail = email.toLowerCase();
+    return await this.userModel.findOne({ cEmail });
   }
 
   async getUsers() {
@@ -92,9 +94,10 @@ export class UsersService {
 
   async resetPassword(emailDto: Email) {
     const email = emailDto.email;
+    const cEmail = email.toLowerCase();
     console.log(email);
     const alreadyExist = await this.userModel.findOne({
-      email: email,
+      email: cEmail,
     });
     console.log(alreadyExist);
     if (!alreadyExist) {
@@ -103,7 +106,7 @@ export class UsersService {
     const name = await this.findByEmail(email);
     const generateOtp = Math.random().toString(12).substr(2, 6);
     const saveOtp = {
-      email: email,
+      email: cEmail,
       otp: generateOtp,
     };
     const newOtp = new this.otpModel(saveOtp);
