@@ -52,6 +52,7 @@ export class UsersService {
       .exec();
     if (!alreadyExist) {
       const { name, email, password, confirm_password } = createUserDto;
+
       if (password !== confirm_password) {
         throw new UnauthorizedException('Passwords do not match!');
       }
