@@ -47,11 +47,14 @@ export class UsersService {
     const UserExist = 'Email exists please Login';
     const alreadyExist = await this.userModel
       .findOne({
-        email: createUserDto.email,
+        email: createUserDto.email.toLowerCase(),
       })
       .exec();
     if (!alreadyExist) {
-      const { name, email, password } = createUserDto;
+      const { name, email, password, confirm_password } = createUserDto;
+      if (password !== confirm_password) {
+        throw new UnauthorizedException('Passwords do not match!');
+      }
       const newUser = new this.userModel(createUserDto);
       const saltRounds = 10;
       newUser.name = name;
