@@ -14,5 +14,4 @@ export class AuthService {
   async validateUser(payload: Payload) {
     return await this.usersService.findByPayload(payload);
   }
-
 }

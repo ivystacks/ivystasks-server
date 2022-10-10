@@ -68,7 +68,9 @@ export class UsersService {
   async loginUser(login: LoginUserDto) {
     const { email, password } = login;
     const cEmail = email.toLowerCase();
-    const user = await this.userModel.findOne({ cEmail });
+    const user = await this.userModel.findOne({
+      email: cEmail,
+    });
     if (!user) {
       throw new UnauthorizedException('users doesnt exist');
     }
