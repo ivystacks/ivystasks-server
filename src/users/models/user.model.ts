@@ -13,6 +13,10 @@ export class User {
 
   @Prop()
   password: string;
+  @Prop()
+  phoneNumber: string;
+  @Prop()
+  country: string;
 
   @Prop()
   isAdmin: boolean;

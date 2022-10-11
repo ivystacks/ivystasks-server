@@ -10,7 +10,12 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   confirm_password: string;
-
+  @IsNotEmpty()
+  @IsString()
+  phoneNumber: string;
+  @IsNotEmpty()
+  @IsString()
+  country: string;
   @IsNotEmpty()
   @IsString()
   password: string;

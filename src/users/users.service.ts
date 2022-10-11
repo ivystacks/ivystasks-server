@@ -51,15 +51,14 @@ export class UsersService {
       })
       .exec();
     if (!alreadyExist) {
-      const { name, email, password, confirm_password } = createUserDto;
+      const { name, email, password, country, phoneNumber } = createUserDto;
 
-      if (password !== confirm_password) {
-        throw new UnauthorizedException('Passwords do not match!');
-      }
       const newUser = new this.userModel(createUserDto);
       const saltRounds = 10;
       newUser.name = name;
+      newUser.country = country;
       newUser.email = email.toLowerCase();
+      newUser.phoneNumber = phoneNumber;
       newUser.password = await bcrypt.hash(createUserDto.password, saltRounds);
       newUser.isAdmin = false;
       await newUser.save();
