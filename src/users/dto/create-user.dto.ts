@@ -7,17 +7,18 @@ export class CreateUserDto {
 
   @IsEmail()
   email: string;
-  @IsNotEmpty()
-  @IsString()
-  confirm_password: string;
+
   @IsNotEmpty()
   @IsString()
   phoneNumber: string;
+
   @IsNotEmpty()
   @IsString()
   country: string;
+
   @IsNotEmpty()
   @IsString()
   password: string;
+
   isAdmin: boolean;
 }
